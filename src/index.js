@@ -32,6 +32,7 @@ class InfiniteCarousel extends Component {
       settings: {},
       autoCycleTimer: null,
       dragging: false,
+      disableSwipeEvents: false,
       touchObject: {
         startX: 0,
         startY: 0,
@@ -886,7 +887,7 @@ class InfiniteCarousel extends Component {
       trackClassName = '';
     }
 
-    const disableSwipeEvents = scrollOnDevice && isTouchDevice();
+    const disableSwipeEvents = (scrollOnDevice && isTouchDevice()) || this.props.disableSwipeEvents;
 
     return (
       <div
@@ -952,6 +953,7 @@ InfiniteCarousel.propTypes = {
   onSlideChange: PropTypes.func,
   onNextClick: PropTypes.func,
   onPreviousClick: PropTypes.func,
+  disableSwipeEvents: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types,
 };
 
 InfiniteCarousel.defaultProps = {
@@ -984,6 +986,7 @@ InfiniteCarousel.defaultProps = {
   onSlideChange: undefined,
   onNextClick: undefined,
   onPreviousClick: undefined,
+  disableSwipeEvents: false
 };
 
 export default InfiniteCarousel;
